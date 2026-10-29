@@ -14,23 +14,24 @@
      - officialEmail: the community's official email address.
      - social: official profile URLs, one per network.
      - joinUrl: the official community joining page/form URL.
-     - team: one entry per team card (slots 1-6, in order).
-       Each entry: { name, role, bio, initials }.
-       Leave name empty to keep that card a labelled placeholder.
-       Bios are added only with the person's approval; no photos
-       are used — initials circles only.
+     - team: one entry per team card (slots 1-8, in order).
+       Each entry: { name, role, initials }.
+       Names and roles only: no biographies, photos or social
+       handles are added. Initials circles only.
      ============================================================ */
   var SITE_CONFIG = {
     officialEmail: "",
     social: { instagram: "", linkedin: "", github: "", youtube: "" },
     joinUrl: "",
     team: [
-      { name: "", role: "", bio: "", initials: "" },
-      { name: "", role: "", bio: "", initials: "" },
-      { name: "", role: "", bio: "", initials: "" },
-      { name: "", role: "", bio: "", initials: "" },
-      { name: "", role: "", bio: "", initials: "" },
-      { name: "", role: "", bio: "", initials: "" }
+      { name: "Sudhanshu Pandey", role: "Founder", initials: "SP" },
+      { name: "Adarsh Pandey", role: "Co-founder", initials: "AP" },
+      { name: "Vikash Mandal", role: "Tech & Platform Lead", initials: "VM" },
+      { name: "Harsh Shankar Dixit", role: "AI & Innovation Lead", initials: "HD" },
+      { name: "Aditya Raj", role: "Events & Operations Lead", initials: "AR" },
+      { name: "Rohan Nishad", role: "Design & Content Lead", initials: "RN" },
+      { name: "Om Shankar Dixit", role: "Projects & Development", initials: "OD" },
+      { name: "Ayush Pandey", role: "Overall Monitoring", initials: "AP" }
     ]
   };
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -52,28 +53,48 @@
   }
 
   /* Apply SITE_CONFIG: email, social links, joining link, team profiles.
-     Empty values leave the honest placeholders in place. */
+     Email, social links and the joining link are shown only when a
+     verified value is set; empty values show nothing. */
   (function applySiteConfig() {
     var cfg = SITE_CONFIG || {};
-    var emailEl = $("#official-email");
-    if (emailEl && cfg.officialEmail) {
+    var extra = $("#contact-extra");
+    var details = $("#contact-details");
+    if (extra && cfg.officialEmail && details) {
+      var row = document.createElement("div");
+      var dt = document.createElement("dt");
+      dt.textContent = "Email";
+      var dd = document.createElement("dd");
       var a = document.createElement("a");
       a.href = "mailto:" + cfg.officialEmail;
       a.textContent = cfg.officialEmail;
-      emailEl.textContent = "";
-      emailEl.appendChild(a);
+      dd.appendChild(a);
+      row.appendChild(dt);
+      row.appendChild(dd);
+      details.appendChild(row);
     }
-    $$(".placeholder-link").forEach(function (btn) {
-      var url = cfg.social && cfg.social[btn.getAttribute("data-url-key")];
-      if (!url) return;
-      var link = document.createElement("a");
-      link.className = btn.className;
-      link.href = url;
-      link.target = "_blank";
-      link.rel = "noopener";
-      link.innerHTML = btn.getAttribute("data-network") + " <span>Open profile \u2197</span>";
-      btn.parentNode.replaceChild(link, btn);
-    });
+    if (extra && cfg.social) {
+      var names = ["instagram", "linkedin", "github", "youtube"];
+      var set = names.filter(function (k) { return cfg.social[k]; });
+      if (set.length) {
+        var h = document.createElement("h3");
+        h.textContent = "Social links";
+        var ul = document.createElement("ul");
+        ul.className = "social-list";
+        set.forEach(function (k) {
+          var li = document.createElement("li");
+          var link = document.createElement("a");
+          link.className = "social-btn";
+          link.href = cfg.social[k];
+          link.target = "_blank";
+          link.rel = "noopener";
+          link.innerHTML = k.charAt(0).toUpperCase() + k.slice(1) + " <span>Open profile \u2197</span>";
+          li.appendChild(link);
+          ul.appendChild(li);
+        });
+        extra.appendChild(h);
+        extra.appendChild(ul);
+      }
+    }
     var slot = $("#join-link-slot");
     if (slot && cfg.joinUrl) {
       var join = document.createElement("a");
@@ -82,7 +103,6 @@
       join.target = "_blank";
       join.rel = "noopener";
       join.textContent = "Open the community joining page \u2197";
-      slot.textContent = "";
       slot.appendChild(join);
       var note = document.createElement("p");
       note.className = "muted small";
@@ -95,16 +115,12 @@
       if (!member || !member.name) return;
       var nameEl = card.querySelector("h3");
       var roleEl = card.querySelector(".team-role");
-      var bioEl = card.querySelector("p.muted.small");
       var initEl = card.querySelector(".avatar-initials");
-      var tagEl = card.querySelector(".placeholder-tag");
       if (nameEl) nameEl.textContent = member.name;
-      if (roleEl) roleEl.textContent = member.role || "Role \u2014 to be confirmed";
-      if (bioEl && member.bio) bioEl.textContent = member.bio;
+      if (roleEl) roleEl.textContent = member.role;
       if (initEl) {
         initEl.textContent = member.initials || member.name.trim().split(/\s+/).map(function (w) { return w.charAt(0); }).slice(0, 2).join("").toUpperCase();
       }
-      if (tagEl) tagEl.remove();
     });
   })();
 
@@ -192,10 +208,10 @@
     if (emptyEl) emptyEl.hidden = shown !== 0;
     filterBtns.forEach(function (b) { b.classList.toggle("is-active", b === btn); });
     if (statusEl) {
-      var label = btn ? btn.textContent.trim() : "All concepts";
+      var label = btn ? btn.textContent.trim() : "All ideas";
       statusEl.textContent = shown === 0
-        ? "No illustrative concepts in this category."
-        : "Showing " + shown + " illustrative concept" + (shown === 1 ? "" : "s") + " — " + label + ".";
+        ? "No project ideas in this category."
+        : "Showing " + shown + " project idea" + (shown === 1 ? "" : "s") + " — " + label + ".";
     }
   }
   filterBtns.forEach(function (btn) {
@@ -267,12 +283,6 @@
     });
   });
 
-  /* Placeholder social links — honest feedback instead of a dead link */
-  $$(".placeholder-link").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      showToast(btn.getAttribute("data-network") + " link has not been added yet. Set it in SITE_CONFIG.social in script.js once the official profile is confirmed.");
-    });
-  });
 
   /* Contact form: validate, then prepare a local draft (nothing is sent) */
   var form = $("#contact-form");
@@ -318,11 +328,11 @@
         + "Name: " + nameInput.value.trim() + "\n"
         + "Email: " + emailInput.value.trim() + "\n\n"
         + messageField.value.trim() + "\n\n"
-        + "— Sent via the BuildNext Community contact form (draft prepared in the browser; no backend connected yet).";
+        + "— Draft prepared in the browser; no backend connected yet.";
       draftText.textContent = draft;
       draftBox.hidden = false;
       feedback.className = "form-feedback success";
-      feedback.textContent = "Thank you, " + nameInput.value.trim().split(" ")[0] + ". Your details look good and a draft is ready below. This form does not send messages yet — copy the draft and send it through the community’s official contact route.";
+      feedback.textContent = "Thanks, " + nameInput.value.trim().split(" ")[0] + ". Your draft is ready below. This form doesn't send messages yet — copy the draft to send it yourself.";
       feedback.hidden = false;
       draftBox.scrollIntoView({ behavior: scrollBehavior(), block: "nearest" });
     });
