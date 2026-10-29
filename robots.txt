@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://buildnextcommunity.in/sitemap.xml
+Sitemap: https://sudhanshupandey1234.github.io/Educational_Website_BuildNext/sitemap.xml
