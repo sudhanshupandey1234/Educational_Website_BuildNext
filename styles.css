@@ -95,7 +95,6 @@ ul,ol{margin:0;padding:0}
 .visual-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.4rem}
 .chip{border-radius:999px;padding:.45rem .85rem;font-size:.84rem;font-weight:600;border:1px solid var(--border)}
 .chip-violet{background:#f3efff;color:#5b21b6;border-color:#ddd0ff}.chip-cyan{background:#ecfeff;color:#0e7490;border-color:#a5f3fc}.chip-navy{background:var(--ink);color:#fff}.chip-outline{background:#fff;color:var(--ink-2)}
-.visual-caption{color:var(--muted);font-size:.88rem;text-align:center;margin-top:.8rem}
 .hero-strip{display:flex;flex-wrap:wrap;gap:.4rem 2rem;border-top:1px solid var(--border);margin-top:2.6rem;padding:1.1rem 0 .4rem}
 .hero-strip a{color:var(--ink-2);text-decoration:none;font-weight:600;font-size:.94rem}
 .hero-strip a:hover{color:var(--violet)}
@@ -134,7 +133,6 @@ ul,ol{margin:0;padding:0}
 .outcome{border-top:1px solid var(--border);padding-top:.9rem;margin-top:1rem;color:var(--ink-2)}
 .program-cta{margin-top:1rem}
 a.social-btn{text-decoration:none;color:var(--ink)}
-.join-placeholder{margin-top:1rem}
 .outcome strong{color:var(--ink)}
 
 /* Journey */
@@ -147,7 +145,6 @@ a.social-btn{text-decoration:none;color:var(--ink)}
 .callout p{margin:0;flex:1;min-width:min(260px,100%)}
 
 /* Events / projects */
-.sample-banner{background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:14px;padding:1rem 1.2rem;color:#5c3d00;margin-bottom:1.5rem}
 .event-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.8rem;flex-wrap:wrap}
 .event-meta{color:var(--muted);font-size:.9rem;font-family:var(--font-mono)}
 .tag-list{display:flex;flex-wrap:wrap;gap:.45rem;list-style:none;margin:.9rem 0 1.1rem}
@@ -158,7 +155,7 @@ a.social-btn{text-decoration:none;color:var(--ink)}
 .filter-btn:hover{border-color:var(--violet);color:var(--violet)}
 .filter-btn.is-active{background:var(--ink);color:#fff;border-color:var(--ink)}
 .filter-status{color:var(--muted);font-size:.92rem}
-.demo-label{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);font-weight:600;margin-bottom:.6rem}
+.idea-label{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);font-weight:600;margin-bottom:.6rem}
 .difficulty{color:var(--muted);font-size:.9rem}
 .project-details{border-top:1px dashed var(--border-strong);margin-top:1rem;padding-top:1rem}
 .project-details h4{margin-top:0}
@@ -171,8 +168,8 @@ a.social-btn{text-decoration:none;color:var(--ink)}
 /* Team */
 .team-card{text-align:left}
 .avatar-initials{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--cyan));color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-weight:700;margin-bottom:.9rem}
-.team-role{color:var(--violet);font-weight:600;margin-bottom:.4rem}
-.placeholder-tag{display:inline-block;background:var(--amber-bg);color:var(--amber-ink);border:1px solid var(--amber-border);border-radius:999px;padding:.25rem .65rem;font-size:.76rem;font-weight:600;margin-top:.6rem}
+.team-card h3{margin-bottom:.15rem}
+.team-role{color:var(--violet);font-weight:600;margin-bottom:0}
 
 /* FAQ */
 .narrow{max-width:780px}
@@ -191,7 +188,6 @@ a.social-btn{text-decoration:none;color:var(--ink)}
 .contact-info dl>div:last-child{border-bottom:0}
 .contact-info dt{font-weight:700;font-size:.86rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
 .contact-info dd{margin:.25rem 0 0}
-.to-be-added{font-weight:600;color:var(--amber-ink)}
 .social-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.8rem}
 .social-btn{width:100%;background:#fff;border:1.5px solid var(--border-strong);border-radius:12px;padding:.75rem .9rem;font:600 .92rem var(--font-body);color:var(--ink);cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:.1rem}
 .social-btn span{font-size:.78rem;color:var(--muted);font-weight:500}
